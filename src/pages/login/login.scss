@@ -1,0 +1,35 @@
+page-login {
+  #login-wrapper {
+    height: 100%;
+	  padding: 1% 2%;
+  	display: flex;
+  	flex-direction: column;
+  	justify-content: space-between;
+  	align-items: center;
+  }
+
+  .medico-logo-wrapper {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: center;
+  	width: 60%;
+  	min-width: 200px;
+  	min-height: 160px;
+  }
+
+  .medico-logo-img {
+  	height: 75px;
+  	width: auto;
+  	margin-bottom: 3%;
+  }
+
+  .medico-logo-name {
+  	height: 37px;
+  	width: auto;
+  }
+
+  #login-button {
+		border-radius: 50px;
+		background-image: linear-gradient(to left, #2E65FE , #00AEEF);
+  }
+}

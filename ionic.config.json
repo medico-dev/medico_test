@@ -1,0 +1,8 @@
+{
+  "name": "medico",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "id": "9eee1b7f"
+}

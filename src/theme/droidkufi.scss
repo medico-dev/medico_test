@@ -1,0 +1,20 @@
+// droidkufi Font
+// Google
+// Apache License, version 2.0
+// http://www.apache.org/licenses/LICENSE-2.0.html
+
+$droidkufi-font-path: $font-path !default;
+
+@font-face {
+  font-family: "droidkufi";
+  font-style: normal;
+  font-weight: 400;
+  src: local("droidkufi"), local("droidkufi-Regular"), url("#{$droidkufi-font-path}/droidkufi-regular.woff2") format("woff2"), url("#{$droidkufi-font-path}/droidkufi-regular.woff") format("woff"), url("#{$droidkufi-font-path}/droidkufi-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "droidkufi";
+  font-style: normal;
+  font-weight: 700;
+  src: local("droidkufi Bold"), local("droidkufi-Bold"), url("#{$droidkufi-font-path}/droidkufi-bold.woff2") format("woff2"), url("#{$droidkufi-font-path}/droidkufi-bold.woff") format("woff"), url("#{$droidkufi-font-path}/droidkufi-bold.ttf") format("truetype");
+}
