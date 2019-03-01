@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-navbar>
+
+  <ion-buttons start>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-buttons>
+
+    <ion-title end>
+      {{ 'NEARBY_CLINICS' | translate }}
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="gray-bg" padding>
+    <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <!-- <div class="clinics_checkbox_container" style="background:#f8f8f8; box-shadow: 0px 2px 20px 0px #aaaaaa;">
+      <div class="row">
+          <div class="col-33"><ion-checkbox style="background:#f8f8f8;"  ng-click="sortOrder()" ng-model="data.dental" class="chkbox">الاسنان</ion-checkbox></div>
+          <div class="col-33"><ion-checkbox style="background:#f8f8f8;" ng-click="sortOrder()" ng-model="data.skin" class="chkbox">الجلدية</ion-checkbox></div> -->
+          <!--<div class="col-25"><ion-checkbox ng-click="sortOrder()" ng-model="data.insurance" class="chkbox">{{lang.clinics.chkbox3}}</ion-checkbox></div>-->
+          <!-- <div style="position:relative;text-align:center;padding-top:2px" class="col-33">
+              <button ng-click="data.showbranch=!data.showbranch" class="button button-clear button-dark text-center btn">
+                  <span ng-if="!data.sort || data.sort == 1">المسافة</span>
+                  <span ng-if="data.sort == 2">التقييم</span>
+                  <i ng-hide="data.showbranch" class="icon ion-chevron-down"></i>
+                  <i ng-show="data.showbranch" class="icon ion-chevron-up"></i>
+              </button>
+              <div class="filter_drop">
+                  <label ng-show="data.showbranch" ng-click="data.sort = 1; data.showbranch=!data.showbranch; sortOrder(); " class="button button-clear button-dark text-center btn">المسافة</label><br>
+                  <label ng-show="data.showbranch" ng-click="data.sort = 2; data.showbranch=!data.showbranch; sortOrder();" class="button button-clear button-dark text-center btn">التقييم</label>
+              </div> -->
+              <!--<select class="text-center filter_drop" ng-model="mySelect" ng-change="showSelectValue(mySelect)">
+                  <option value="distance">{{lang.clinics.distbtn}}</option>
+                  <option value="rating">{{lang.details.rating}}</option>
+              </select>-->
+
+          <!-- </div>
+      </div>
+    </div> -->
+
+
+    <div class="clinic_list" on-touch="onTouch()" *ngFor="let clinic of clinicsData">
+
+
+            <div ng-click="item_clicked(clinic)" class="clinic-list-item {{clinic.is_featured == 1 && 'featuredDiv'}}" >
+
+              <div class="clinic-list-icons-wrapper">
+                <img class="thumb_img" src="{{getClinicImage(clinic)}}" >
+                <div class="markers_tray">
+                    <img *ngIf="clinic.is_beauty_clinic == 1" src="assets/img/skincare.png">
+                    <img *ngIf="clinic.is_dental_clinic == 1" src="assets/img/dental.png">
+                    <img *ngIf="clinic.is_promo == 1" src="assets/img/promo.png">
+                </div>
+              </div>
+              <div class="clinic-list-info-wrapper">
+                <h3 class="clinic_name">{{currentLang == 'en' && clinic.title || clinic.title_ar }}</h3>
+                <h4 class="clinic_name details"><ion-icon name="time"></ion-icon>&nbsp;&nbsp;{{currentLang == 'en' && clinic.working_hours || clinic.working_hours_ar }}
+
+                </h4>
+                <p class="shortened_address">
+                    {{currentLang == 'en' && clinic.address || clinic.address_ar }}
+                </p>
+                <!-- <span class="clinic_name">
+                    <ion-icon name="map"></ion-icon>&nbsp;&nbsp;{{clinic.distance_in_km | number:2}} KM
+                </span> -->
+                <p class="ad_ltr">
+                    {{currentLang == 'en' && clinic.city || clinic.city_ar }}
+
+                </p>
+              </div>
+              <div class="clinic-list-actions-wrapper">
+                <img #refEl (click)="changeOfHeart($event.target)" src="assets/img/icons/icon-heart-empty.png" />
+                <img src="assets/img/icons/icons8-forward-arrow-50.png" />
+                <img src="assets/img/icons/icons8-chevron-down-24.png" />
+                      <!-- <a ng-if="clinic.contact !== 0" style="color:black !important;" href="javascrip: void();" ng-click="openCall('{{clinic.contact}}')"><i class="icon ion-ios-telephone-outline"></i></a>
+                      <i ng-click="markfav(clinic)" class="icon {{clinic.favorite == 1 && 'ion-ios-heart' || 'ion-ios-heart-outline'}}" style="{{clinic.favorite == 1 && 'color : red;' || ''}}"></i> -->
+                      <!--<i ng-click="fbShare(clinic)" class="icon ion-social-facebook"></i>-->
+                      <!-- <i ng-click="socialShare(clinic)" class="icon ion-android-share-alt"></i> -->
+              </div>
+
+
+
+
+                <!-- <rating ng-model="clinic.rating" max="rating.max"></rating><span>({{clinic.ratingcount}})</span> -->
+                <!---->
+
+                <!-- <button ng-show="clinic.is_featured == 1" class="button button-outline button-dark button-small button-right clinic_button btn feat" >AD</button>
+                <button ng-show="clinic.is_insured == 1" class="button button-outline button-dark button-small button-right clinic_button btn" >{{lang.clinics.insurancebtn}}</button> -->
+            </div>
+
+
+        </div>
+
+
+        <div class="list error_container" *ngIf="clinicsData.length == 0" >
+          <div class="item">
+            <img class="error_message_icon" src="assets/img/nodata_icon.png" />
+          </div>
+          <div class="item error_description">
+            <h2 ng-if="!data.q || data.q == ''">للاسف، لا توجد أية عيادة قريبة. تريد اضافة واحدة؟ اضغط هنا</h2>
+            <h2 ng-if="data.q && data.q != ''"> نعتذر، لكن لا توجد عيادة بهذا الاسم، جرّب اسم آخر أو اضفها من هنا </h2>
+          </div>
+          <div class="signup_button">
+            <input type="button" ng-click="gotocreate_clinic()" class="button button-outline button-positive" value="اضافة عيادة">
+          </div>
+        </div>
+
+    <!-- <ion-infinite-scroll ng-if="moredatacanbeloaded" immediate-check="false" on-infinite="loadMore()" distance="5%"> -->
+
+</ion-content>

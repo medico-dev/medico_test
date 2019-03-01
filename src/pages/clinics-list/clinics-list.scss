@@ -1,0 +1,119 @@
+page-clinics-list {
+  ion-navbar.toolbar {
+    flex-direction: row-reverse;
+  }
+  ion-content.gray-bg {
+    background:#f8f8f8;
+  }
+  .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+    bottom: -10px;
+    height: 12px;
+    background-image: linear-gradient(rgba(248, 248, 248,1),rgba(248, 248, 248,.75), rgba(248, 248, 248,0));
+  }
+
+  .clinic_list {
+    display: block;
+    margin: 0 auto 20px;
+    width: 100%;
+  }
+  .clinic_list .clinic-list-item {
+  	background-color: #fff;
+    @include rtl() {
+  	   border-right: solid 7px color($colors, primary);
+    }
+    @include ltr() {
+  	   border-left: solid 7px color($colors, primary);
+    }
+  	border-radius: 5px;
+  	box-shadow: 0px 3px 6px 0px color($colors, shadow);
+  	display: flex;
+  	flex-direction: row;
+  	width: 100%;
+  	padding: 5px;
+  	justify-content: space-between;
+  	min-height: 130px;
+  }
+
+  .clinic-list-icons-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0 8px;
+    flex: 1 2 80px;
+
+    .markers_tray {
+      margin-top: 10px;
+      img {
+        width: 20px;
+        margin: 0 5px;
+      }
+    }
+  }
+
+
+
+  @include rtl() {
+      // Custom rtl style goes here
+        .clinic_name{
+          font-family: Conv_Changa-Light,Arial, Helvetica, sans-serif;
+        }
+  }
+
+  .clinic-list-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0 8px;
+    flex: 2 1 130px;
+    *{
+      //font-size: 14px;
+      margin: 0 0 4px 0;
+    }
+    .clinic_name {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .clinic_name.details {
+      font-size: 12px;
+      color: #666;
+    }
+    .shortened_address {
+      font-size: 12px;
+      color: #666;
+    }
+    .ad_ltr{
+      background: #f1f1f1;
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: inline-block;
+      font-weight: bold;
+      font-size: 12px;
+      color: #666;
+    }
+  }
+  .clinic-list-actions-wrapper {
+  	display: flex;
+    flex-direction: column;
+    /* width: 10%; */
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 8px;
+    flex: 0 0 25px;
+  }
+
+  .clinic-list-actions-wrapper img {
+      width: 25px;
+      height: auto;
+  }
+
+  .clinic-list-actions-wrapper img:nth-last-child(2) {
+  	margin-bottom: auto;
+  }
+
+  .clinic_list .clinic-list-item.featuredDiv{
+	background-color: #e1edfd;
+  }
+  .thumb_img{
+    max-width: 120px;
+  }
+}
