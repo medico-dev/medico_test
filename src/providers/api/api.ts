@@ -31,9 +31,6 @@ export class Api {
   }
 
   post(endpoint: string, body: any, reqOpts?: any) {
-    console.log("moh url: ",this.url + '/' + endpoint);
-    console.log("moh body: ",body);
-    console.log("moh reqOpts: ",reqOpts);
     return this.http.post(this.url + '/' + endpoint, body, reqOpts);
   }
 

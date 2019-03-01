@@ -16,12 +16,12 @@
 // automatically applied to the <body> element in the app.
 
 
-@include rtl() {
-    // Custom rtl style goes here
-    * {
-      direction: rtl;
-    }
-}
+// .ar *{
+//   direction: rtl;
+// }
+// .en *{
+//   direction: ltr;
+// }
 
 ion-app.ios {
   font-family: -apple-system, "Helvetica Neue", "Roboto", "droidkufi", sans-serif;

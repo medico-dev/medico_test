@@ -1,4 +1,17 @@
 page-login {
+  background: lightgray;
+  @include rtl() {
+      // Custom rtl style goes here
+        background: red;
+  }
+  @include ltr() {
+      // Custom rtl style goes here
+        background: lightgreen;
+  }
+  @include multi-dir() {
+      // Custom rtl style goes here
+        background: orange;
+  }
   #login-wrapper {
     height: 100%;
 	  padding: 1% 2%;
@@ -31,5 +44,29 @@ page-login {
   #login-button {
 		border-radius: 50px;
 		background-image: linear-gradient(to left, #2E65FE , #00AEEF);
+  }
+}
+.ar {
+  .item-md.item-block .item-inner {
+    padding-left: 8px;
+    padding-right: 0;
+  }
+  .label-md{
+    margin: 13px 0 13px 8px;
+  }
+  .label-md[floating] {
+    transform-origin: right top;
+  }
+}
+.en {
+  .item-md.item-block .item-inner {
+    padding-left: 0;
+    padding-right: 8px;
+  }
+  .label-md{
+    margin: 13px 8px 13px 0;
+  }
+  .label-md[floating] {
+    transform-origin: left top;
   }
 }

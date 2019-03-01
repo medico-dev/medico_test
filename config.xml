@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="co.Alteqani.Alteb.medico" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Medico</name>
+    <name>Medico2</name>
     <description>Find Dental Clinics and Beauty Saloons in your City</description>
     <author email="mohammed@medico-ar.com" href="http://medico-ar.com/">Medico Development Team</author>
     <content src="index.html" />
@@ -83,4 +83,5 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^3.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <engine name="android" spec="7.1.4" />
+    <engine name="ios" spec="4.5.5" />
 </widget>

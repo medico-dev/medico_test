@@ -11,6 +11,7 @@ import { Items } from '../../providers';
 })
 export class ListMasterPage {
   currentItems: Item[];
+  swipeButtonSide: string = 'start';
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
     this.currentItems = this.items.query();

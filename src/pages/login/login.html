@@ -10,8 +10,8 @@
 <ion-content>
   <div id="login-wrapper">
 
-    <div class="text-right" style="align-self: flex-end;">
-        <button ion-button clear>English</button>
+    <div class="text-right" style="align-self: flex-start;">
+        <button ion-button clear (click)="changeLanguage()">{{ 'OTHER_LANGUAGE' | translate }}</button>
     </div>
 
     <div class="medico-logo-wrapper">
@@ -48,8 +48,8 @@
       </ion-list>
     </form>
 
-    <div class="text-right" style="align-self: flex-start;">
-        <button ion-button clear>تخطى</button>
+    <div class="text-right" style="align-self: flex-end;">
+        <button ion-button clear (click)="skipLogin()">{{ 'TUTORIAL_SKIP_BUTTON' | translate }}</button>
     </div>
 
   </div>

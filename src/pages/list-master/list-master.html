@@ -25,7 +25,7 @@
         <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
       </button>
 
-      <ion-item-options>
+      <ion-item-options side="{{swipeButtonSide}}">
         <button ion-button color="danger" (click)="deleteItem(item)">
           {{ 'DELETE_BUTTON' | translate }}
         </button>

@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers';
-import { MainPage } from '../';
+import { ClinicsListPage } from '../';
 
 @IonicPage()
 @Component({
@@ -21,12 +21,14 @@ export class LoginPage {
 
   // Our translated text strings
   private loginErrorString: string;
+  private isArabic: boolean;
 
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
     public translateService: TranslateService) {
 
+    this.isArabic = true;
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
@@ -36,7 +38,7 @@ export class LoginPage {
   doLogin() {
     if (this.account.username == "" || this.account.username == null) {
       alert('Please check your credentials!');
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(ClinicsListPage);
       var t = this.loginErrorString;
     }else if (this.account.username.length == 0) {
       alert('Please check your username!');
@@ -47,9 +49,9 @@ export class LoginPage {
     }else{
       this.user.login(this.account).subscribe((resp) => {
         console.log("moh logged in: ", resp);
-        this.navCtrl.push(MainPage);
+        this.navCtrl.setRoot(ClinicsListPage);
       }, (err) => {
-        this.navCtrl.push(MainPage);
+        //this.navCtrl.push(ClinicsListPage);
         // Unable to log in
         console.log("moh err: ",err);
         let toast = this.toastCtrl.create({
@@ -62,38 +64,14 @@ export class LoginPage {
     }
   }
 
+  skipLogin() {
+    this.navCtrl.push(ClinicsListPage);
+  }
 
-  // $scope.gotohome = function(){
-  //   var signinArray = JSON.stringify($scope.data);
-  //   var url = RESOURCES.baseurl+'/login-customer?params='+signinArray;
-  //   console.log(url);
-	// 	if ($scope.data.username == "" || $scope.data.username == null) {
-	// 		alert('Please check your credentials!');
-	// 	}else if ($scope.data.username.length == 0) {
-	// 		alert('Please check your credentials!');
-	// 	}else if($scope.data.password == "" || $scope.data.password == null){
-	// 	   alert('Please check your credentials!');
-	// 	}else if($scope.data.password.length == 0){
-	// 	   alert('Please check your credentials!');
-	// 	}else{
-	// 		AppLevelService.GetResponseData(url).success(function(data) {
-	// 			if(data.response == 1){
-  //         console.log(data);
-  //         if(data.data[0].status == 1){
-  //           $rootScope.updateUser(data.data[0], data.token);
-  //           $rootScope.showMsg("success", $rootScope.lang.messages.signinSuccess, 'app.clinics');
-  //           $rootScope.pushFuncReg();
-  //         }else{
-  //           $rootScope.tempUser = data.data[0];
-  //           console.log("Temp User:",$rootScope.tempUser);
-  //           $rootScope.showMsg("success", $rootScope.lang.messages.signinSuccess, 'app.confirmEmail');
-  //         }
-	// 			}
-	// 		}).error(function(data) {
-  //       $rootScope.showMsg("error", data, "");
-	// 		});
-	// 	}
-  // }
-
-
+  changeLanguage() {
+    if(this.translateService.currentLang === "ar")
+      this.translateService.use('en');
+    else
+      this.translateService.use('ar');
+  }
 }

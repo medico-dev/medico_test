@@ -1,4 +1,7 @@
 page-tutorial {
+  .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+    background-image: none;
+  }
   .toolbar-background {
     background: transparent;
     border-color: transparent;
