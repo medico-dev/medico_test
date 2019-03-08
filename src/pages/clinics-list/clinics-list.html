@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [ngClass]="isScrolledClass">
   <ion-navbar>
 
   <ion-buttons start>
@@ -15,11 +15,15 @@
 </ion-header>
 
 
-<ion-content class="gray-bg" padding>
-    <ion-refresher
+<ion-content class="gray-bg" padding
+  scroll-events="true"
+  (ionScrollStart)="logScrollStart()"
+  (ionScroll)="logScrolling($event)"
+  (ionScrollEnd)="logScrollEnd()">
+    <!-- <ion-refresher
             pulling-text="Pull to refresh..."
             on-refresh="doRefresh()">
-    </ion-refresher>
+    </ion-refresher> -->
 
     <!-- <div class="clinics_checkbox_container" style="background:#f8f8f8; box-shadow: 0px 2px 20px 0px #aaaaaa;">
       <div class="row">

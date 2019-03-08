@@ -1,14 +1,22 @@
 page-clinics-list {
-  ion-navbar.toolbar {
+  @at-root ion-app.md ion-navbar.toolbar {
     flex-direction: row-reverse;
   }
   ion-content.gray-bg {
     background:#f8f8f8;
   }
-  .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
-    bottom: -10px;
-    height: 12px;
+  .content-scrolled.header-md::after, .content-scrolled.header-ios::after {
+    bottom: -18px;
+    height: 20px;
     background-image: linear-gradient(rgba(248, 248, 248,1),rgba(248, 248, 248,.75), rgba(248, 248, 248,0));
+    //background-image: none;
+  }
+  .content-not-scrolled.header-md::after, .content-not-scrolled.header-ios::after {
+    background-image: none;
+  }
+
+  .content-not-scrolled.header-ios::after .toolbar-ios:last-child .toolbar-background-ios {
+    border: none;
   }
 
   .clinic_list {
@@ -19,10 +27,10 @@ page-clinics-list {
   .clinic_list .clinic-list-item {
   	background-color: #fff;
     @include rtl() {
-  	   border-right: solid 7px color($colors, primary);
+  	   border-right: solid 5px color($colors, primary);
     }
     @include ltr() {
-  	   border-left: solid 7px color($colors, primary);
+  	   border-left: solid 5px color($colors, primary);
     }
   	border-radius: 5px;
   	box-shadow: 0px 3px 6px 0px color($colors, shadow);

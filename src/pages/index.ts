@@ -11,3 +11,4 @@ export const Tab2Root = 'SearchPage';
 export const Tab3Root = 'SettingsPage';
 
 export const ClinicsListPage = 'ClinicsListPage';
+export const LoginPage = 'LoginPage';

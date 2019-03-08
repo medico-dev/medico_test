@@ -4,16 +4,17 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Config, Nav, Platform, MenuController } from 'ionic-angular';
 
-import { FirstRunPage } from '../pages';
-import { Settings } from '../providers';
+import { FirstRunPage, ClinicsListPage, LoginPage } from '../pages';
+import { Settings, User } from '../providers';
 
 @Component({
   selector: 'page-clinics-list',
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = FirstRunPage;
+  rootPage;
   currentLang: string;
+  user: User;
   menuSide: string;
   myPlatform: Platform;
 
@@ -33,7 +34,18 @@ export class MyApp {
     { title: 'Search', component: 'SearchPage' }
   ]
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, public menuCtrl: MenuController) {
+  constructor(private translate: TranslateService, platform: Platform, settings: Settings, user: User, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, public menuCtrl: MenuController) {
+    this.user = user;
+    this.user.load().then( (result) => {
+        if(result == "success"){
+          this.rootPage = ClinicsListPage;
+        } else {
+          this.rootPage = FirstRunPage;
+        }
+      }, (reason) => {
+        this.rootPage = FirstRunPage;
+      }
+    );
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -97,6 +109,12 @@ export class MyApp {
     }else{
       this.translate.use('ar');
     }
+  }
+
+  logout(){
+    this.user.logout().then( (resutl) => {
+      this.nav.setRoot(LoginPage);
+    });
   }
 
   openPage(page) {

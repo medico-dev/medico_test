@@ -1,6 +1,7 @@
 import 'rxjs/add/operator/toPromise';
 
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 import { Api } from '../api/api';
 
@@ -26,8 +27,14 @@ import { Api } from '../api/api';
 @Injectable()
 export class User {
   _user: any;
+  _userToken: any;
+  storage: Storage;
+  private USER_TOKEN_KEY: string = '_userToken';
+  private USER_OBJECT_KEY: string = '_userObject';
 
-  constructor(public api: Api) { }
+  constructor(public api: Api, storage: Storage) {
+    this.storage = storage
+  }
 
   /**
    * Send a POST request to our login endpoint with the data
@@ -42,8 +49,13 @@ export class User {
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
       if (res.response === 1) {
-        this._loggedIn(res);
+        if (res.token != undefined) {
+          this._loggedIn(res);
+        } else {
+          console.error('ERROR No Token', res);
+        }
       } else {
+        console.error('Response ERROR', res);
       }
     }, err => {
       console.error('ERROR', err);
@@ -76,12 +88,49 @@ export class User {
    */
   logout() {
     this._user = null;
+    this._userToken = null;
+    this.storage.remove(this.USER_OBJECT_KEY);
+    return this.storage.remove(this.USER_TOKEN_KEY);
   }
 
   /**
    * Process a login/signup response to store user data
    */
   _loggedIn(resp) {
-    this._user = resp.user;
+    this._user = resp.data[0];
+    this._userToken = resp.token;
+    this.save(this.USER_OBJECT_KEY, this._user);
+    this.save(this.USER_TOKEN_KEY, this._userToken);
+  }
+
+  save(key: string ,value: any) {
+    this.storage.set(key, value).then((result) => {
+      console.log(`Successfully saved item to storage:\nKey: ${key} \nValue: `,value, result);
+    }, (reason) => {
+      console.log(`Failed when saving item to storage:\nKey: ${key} \nValue: `,value, reason);
+    });
+  }
+
+  load() {
+    console.log("loading user");
+    return this.storage.get(this.USER_TOKEN_KEY).then((value) => {
+      if (value) {
+        //  this.token = value;
+        this._userToken = value;
+        console.log("loaded token is: ", value);
+        this.storage.get(this.USER_OBJECT_KEY).then((value) => {
+          this._user = value;
+          console.log("loaded user object is: ", value);
+        }, (reason) => {
+          console.log("Failed loading user object: ", reason);
+        });
+        return "success";//this._mergeDefaults(this._defaults);
+      } else {
+        console.log("loaded token empty is: ", value);
+        return  "failed";//
+      }
+    }, (reason) => {
+      console.log("Failed loading user token: ", reason);
+    } );
   }
 }
