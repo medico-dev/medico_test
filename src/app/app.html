@@ -42,4 +42,9 @@
   </ion-content>
 
 </ion-menu>
+
+<div *ngIf="showSplash" class="splash">
+  <img class="spinner" src="assets/img/logo-splash.gif">
+</div>
+
 <ion-nav class="{{currentLang}}" #content [root]="rootPage"></ion-nav>

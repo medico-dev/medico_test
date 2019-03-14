@@ -3,6 +3,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Config, Nav, Platform, MenuController } from 'ionic-angular';
+import { timer } from 'rxjs/observable/timer';
 
 import { FirstRunPage, ClinicsListPage, LoginPage } from '../pages';
 import { Settings, User } from '../providers';
@@ -17,6 +18,7 @@ export class MyApp {
   user: User;
   menuSide: string;
   myPlatform: Platform;
+  showSplash = true; // <-- show animation
 
   @ViewChild(Nav) nav: Nav;
 
@@ -47,10 +49,11 @@ export class MyApp {
       }
     );
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
+      // Okay, so the platform is readsy and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      timer(2500).subscribe(() => this.showSplash = false);
     });
     this.myPlatform = platform;
     this.initTranslate();
